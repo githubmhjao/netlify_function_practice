@@ -4,8 +4,11 @@
   "main": "index.js",
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",
-  "devDependencies": {
-    "netlify-lambda": "^1.4.3"
+  "dependencies": {
+    "@line/bot-sdk": "^6.8.2",
+    "express": "^4.17.1",
+    "netlify-lambda": "^1.6.3",
+    "serverless-http": "^2.3.0"
   },
   "scripts": {
     "dev": "netlify-lambda serve functions",
