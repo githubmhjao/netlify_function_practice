@@ -4,7 +4,7 @@
 
 const express = require('express');
 const line = require('@line/bot-sdk');
-const serverless = require('serverless-http'); //追加
+const serverless = require('serverless-http');
 const app = express();
 
 const config = {
@@ -16,7 +16,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => res.send('Hello LINE BOT!(GET)'));
 router.post('/webhook', line.middleware(config), (req, res) => {
-    console.log(config);
+    // console.log(config);
     console.log(req.body.events);
 
     if(req.body.events[0].source.userId == 'Udeadbeefdeadbeefdeadbeefdeadbeef'){
