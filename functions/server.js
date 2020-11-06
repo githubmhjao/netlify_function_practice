@@ -13,9 +13,10 @@ const config = {
 };
 
 const router = express.Router();
+
 router.get('/', (req, res) => res.send('Hello LINE BOT!(GET)'));
 router.post('/webhook', line.middleware(config), (req, res) => {
-    console.log(req.body);
+    console.log(config);
     console.log(req.body.events);
 
     if(req.body.events[0].source.userId == 'Udeadbeefdeadbeefdeadbeefdeadbeef'){
