@@ -11,7 +11,7 @@
     "serverless-http": "^2.3.0"
   },
   "scripts": {
-    "dev": "netlify-lambda serve functions",
-    "build": "netlify-lambda build functions"
+    "dev": "netlify-lambda serve ./functions",
+    "build": "netlify-lambda build ./functions"
   }
 }
