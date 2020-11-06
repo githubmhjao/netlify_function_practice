@@ -17,7 +17,7 @@ router.get('/', (req, res) => res.send('Hello LINE BOT!(GET)'));
 router.post('/webhook', line.middleware(config), (req, res) => {
     console.log(req.body.events);
 
-    if(req.body.events[0].source.userId: 'Udeadbeefdeadbeefdeadbeefdeadbeef'){
+    if(req.body.events[0].source.userId == 'Udeadbeefdeadbeefdeadbeefdeadbeef'){
         res.send('Hello LINE BOT!(POST)');
         console.log('Webhook Check');
         return; 
