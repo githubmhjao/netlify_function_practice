@@ -46,12 +46,12 @@ function handleEvent(event) {
 //      if(err) return console.error(err)
 //      console.log(`successfully write ${userId}.txt`)
 //    })
-    console.log('__dirname：', __dirname)
-    console.log('__filename：', __filename)
-    console.log('process.cwd()：', process.cwd())
-    console.log('./：', path.resolve('./'))
+//    console.log('__dirname：', __dirname)
+//    console.log('__filename：', __filename)
+//    console.log('process.cwd()：', process.cwd())
+//    console.log('./：', path.resolve('./'))
     
-    fs.readdir('.', (err, files) => {
+    fs.readdir('/', (err, files) => {
       files.forEach(file => {
         console.log(file)
       })
