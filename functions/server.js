@@ -41,10 +41,10 @@ function handleEvent(event) {
     console.log(event)
     const userId = event.source.userId
     
-    fs.writeFile(`${userId}.txt`, 'This is my text', function (err) {
-      if (err) throw err
-      console.log(`successfully write ${userId}.txt`)
-    })
+//    fs.writeFile(`${userId}.txt`, 'This is my text', function (err) {
+//      if(err) return console.error(err)
+//      console.log(`successfully write ${userId}.txt`)
+//    })
     
     fs.readdir('.', (err, files) => {
       files.forEach(file => {
