@@ -51,7 +51,7 @@ function handleEvent(event) {
 //    console.log('process.cwd()：', process.cwd())
 //    console.log('./：', path.resolve('./'))
     
-    fs.readdir('/', (err, files) => {
+    fs.readdir('/tmp/', (err, files) => {
       files.forEach(file => {
         console.log(file)
       })
