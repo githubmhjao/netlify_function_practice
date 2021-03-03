@@ -2,46 +2,62 @@
 
 // courtesy from https://github.com/n0bisuke/netlify-functions-linebot-example
 
-const express = require('express');
-const line = require('@line/bot-sdk');
-const serverless = require('serverless-http');
-const app = express();
+const express = require('express')
+const line = require('@line/bot-sdk')
+const serverless = require('serverless-http')
+const fs = require('fs')
+
+const app = express()
 
 const config = {
     channelSecret: process.env.lineChannelSecret,
     channelAccessToken: process.env.lineChannelAccessToken
-};
+}
 
-const router = express.Router();
+const router = express.Router()
 
-router.get('/', (req, res) => res.send('Hello LINE BOT!(GET)'));
+router.get('/', (req, res) => res.send('Hello LINE BOT!(GET)'))
 router.post('/webhook', line.middleware(config), (req, res) => {
-    // console.log(config);
-    console.log(req.body.events);
+    // console.log(config)
+    console.log(req.body.events)
 
     if(req.body.events.length == 0){
-        res.send('Hello LINE BOT!(POST)');
-        console.log('Webhook Check');
-        return; 
+        res.send('Hello LINE BOT!(POST)')
+        console.log('Webhook Check')
+        return
     }
 
     Promise
       .all(req.body.events.map(handleEvent))
-      .then((result) => res.json(result));
+      .then((result) => res.json(result))
 });
 
-const client = new line.Client(config);
+const client = new line.Client(config)
 function handleEvent(event) {
     if (event.type !== 'message' || event.message.type !== 'text') {
-      return Promise.resolve(null);
+      return Promise.resolve(null)
     }
 
+    console.log(event)
+    const userId = event.source.userId
+    
+    fs.writeFile(`${userId}.txt`, 'This is my text', function (err) {
+      if (err) throw err
+      console.log(`successfully write ${userId}.txt`)
+    })
+    
+    fs.readdir('.', (err, files) => {
+      files.forEach(file => {
+        console.log(file)
+      })
+    })
+    
     return client.replyMessage(event.replyToken,{
       type: 'text',
       text: `${event.message.text} for Netlify`
-    });
+    })
 }
 
-app.use('/.netlify/functions/server', router);
-module.exports = app;
-module.exports.handler = serverless(app);
+app.use('/.netlify/functions/server', router)
+module.exports = app
+module.exports.handler = serverless(app)
