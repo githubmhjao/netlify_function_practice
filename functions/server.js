@@ -39,13 +39,13 @@ function handleEvent(event) {
       return Promise.resolve(null)
     }
 
-    console.log(event)
     const userId = event.source.userId
+    console.log(userId)
     
-//    fs.writeFile(`${userId}.txt`, 'This is my text', function (err) {
-//      if(err) return console.error(err)
-//      console.log(`successfully write ${userId}.txt`)
-//    })
+    fs.writeFile(`/tmp/${userId}.txt`, 'This is my text', function (err) {
+      if(err) return console.error(err)
+      console.log(`successfully write ${userId}.txt`)
+    })
 //    console.log('__dirname：', __dirname)
 //    console.log('__filename：', __filename)
 //    console.log('process.cwd()：', process.cwd())
