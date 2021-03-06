@@ -46,15 +46,15 @@ function readRecord(userId) {
 function updateRecord(userId, record, message) {
     
     record.reply.push(message)
+    record.stage += 1
     
     if (record.stage < 4) {
-        record.stage += 1
         fs.writeFileSync(`/tmp/${userId}.txt`, JSON.stringify(record))
-        return record
     } else {
         fs.unlinkSync(`/tmp/${userId}.txt`)
-        return record
     }
+    
+    return record
 }
 
 function handleEvent(event) {
