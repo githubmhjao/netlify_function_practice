@@ -52,7 +52,7 @@ function updateRecord(userId, record, message) {
         fs.writeFileSync(`/tmp/${userId}.txt`, JSON.stringify(record))
         return record
     } else {
-        fs.unlinkSync('/tmp/${userId}.txt')
+        fs.unlinkSync(`/tmp/${userId}.txt`)
         return record
     }
 }
