@@ -49,7 +49,7 @@ function updateRecord(userId, record, message) {
     
     if (record.stage < 4) {
         record.stage += 1
-        fs.writeFileSync(`/tmp/${userId}.txt`, JSON.Stringify(record))
+        fs.writeFileSync(`/tmp/${userId}.txt`, JSON.stringify(record))
         return record
     } else {
         fs.unlinkSync('/tmp/${userId}.txt')
