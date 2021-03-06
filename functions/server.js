@@ -34,32 +34,49 @@ router.post('/webhook', line.middleware(config), (req, res) => {
 });
 
 const client = new line.Client(config)
+
+function readRecord(userId) {
+    try {
+        return JSON.parse(fs.readFileSync(`/tmp/${userId}.txt`, 'utf8'))
+    } catch (err) {
+        return {stage: 0, reply: []}
+    }
+}
+
+function updateRecord(userId, record, message) {
+    
+    record.reply.push(message)
+    
+    if (record.stage < 4) {
+        record.stage += 1
+        fs.writeFileSync(`/tmp/${userId}.txt`, JSON.Stringify(record))
+        return record
+    } else {
+        fs.unlinkSync('/tmp/${userId}.txt')
+        return record
+    }
+}
+
 function handleEvent(event) {
     if (event.type !== 'message' || event.message.type !== 'text') {
       return Promise.resolve(null)
     }
 
     const userId = event.source.userId
-    console.log(userId)
-    
-    fs.writeFile(`/tmp/${userId}.txt`, 'This is my text', function (err) {
-      if(err) return console.error(err)
-      console.log(`successfully write ${userId}.txt`)
-    })
+    let record
+    record = readRecord(userId)
+    record = updateRecord(userId, record, event.message.text)
+    const replyText = JSON.stringify(record)
+    console.log(replyText)
+
 //    console.log('__dirname：', __dirname)
 //    console.log('__filename：', __filename)
 //    console.log('process.cwd()：', process.cwd())
 //    console.log('./：', path.resolve('./'))
     
-    fs.readdir('/tmp/', (err, files) => {
-      files.forEach(file => {
-        console.log(file)
-      })
-    })
-    
     return client.replyMessage(event.replyToken,{
       type: 'text',
-      text: `${event.message.text} for Netlify`
+      text: `${replyText} for Netlify`
     })
 }
 
