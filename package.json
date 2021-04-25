@@ -1,7 +1,6 @@
 {
   "name": "netlify-function-example",
   "version": "1.0.0",
-  "main": "index.js",
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
   "license": "MIT",
   "dependencies": {
