@@ -66,8 +66,24 @@ function handleEvent(event) {
     let record
     record = readRecord(userId)
     record = updateRecord(userId, record, event.message.text)
-    const replyText = JSON.stringify(record)
-    console.log(replyText)
+    
+    let replyText
+    switch(record.stage) {
+        case 1: 
+            replyText = "嗨～歡迎建立 flexMessage 名片！\n[1] 請輸入姓名"
+            break
+        case 2:
+            replyText = "[2] 請輸入公司"
+            break
+        case 3:
+            replyText = "[3] 請輸入電話"
+            break
+        case 4:
+            replyText = record.reply.map((x, i) => `${i}=${x}`).join('&')
+            break            
+    }
+//     const replyText = JSON.stringify(record)
+//     console.log(replyText)
 
 //    console.log('__dirname：', __dirname)
 //    console.log('__filename：', __filename)
@@ -76,7 +92,7 @@ function handleEvent(event) {
     
     return client.replyMessage(event.replyToken,{
       type: 'text',
-      text: `${replyText} for Netlify`
+      text: replyText
     })
 }
 
