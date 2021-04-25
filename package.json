@@ -11,6 +11,6 @@
   },
   "scripts": {
     "dev": "netlify-lambda serve ./functions",
-    "build": "netlify-lambda build ./functions"
+    "build": "npm-run-all --parallel build:**"
   }
 }
