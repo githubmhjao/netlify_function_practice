@@ -122,11 +122,13 @@ async function liffInit() {
   await liff.init({ liffId: "1655909873-X2Ed918K" })
   if (liff.isLoggedIn()) {
     document.getElementById("btnShare").style.display = "block"
+    document.getElementById("card").style.display = "block"
     if (!liff.isInClient()) {
       document.getElementById("btnLogOut").style.display = "block"
     }
   } else {
     document.getElementById("btnLogin").style.display = "block"
+    document.getElementById("card").style.display = "none"
   }
 }
 
