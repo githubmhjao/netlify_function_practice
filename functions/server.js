@@ -79,7 +79,8 @@ function handleEvent(event) {
             replyText = "[3] 請輸入電話"
             break
         case 4:
-            replyText = record.reply.map((x, i) => `${i}=${x}`).join('&')
+            replyText = record.reply.map((x, i) => `${i}=${encodeURIComponent(x)}`).join('&')
+            replyText = "https://wizardly-newton-b42de5.netlify.app/?" + replyText
             break            
     }
 //     const replyText = JSON.stringify(record)
