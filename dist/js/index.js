@@ -132,7 +132,9 @@ async function liffInit() {
 
 function fetchData() {
   const urlParams = new URLSearchParams(window.location.search)
-  console.log(urlParams)
+  document.getElementById("setName").innerText = urlParams.get('1')
+  document.getElementById("setCom").innerText = urlParams.get('2')
+  document.getElementById("setPhone").innerText = urlParams.get('3')
 }
 
 function main() {
