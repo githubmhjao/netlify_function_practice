@@ -1,103 +1,109 @@
 async function sendShare() {
+  const params = fetchParams()
   const result = await liff.shareTargetPicker([
     {
-      "type": "flex",
-      "altText": "Flex Message",
-      "contents": {
-        "type": "bubble",
-        "body": {
-          "type": "box",
-          "layout": "vertical",
-          "spacing": "md",
-          "contents": [
-            {
-              "type": "text",
-              "text": "BROWN'S ADVENTURE",
-              "size": "xl",
-              "gravity": "center",
-              "weight": "bold",
-              "wrap": true
-            },
-            {
-              "type": "box",
-              "layout": "vertical",
-              "spacing": "sm",
-              "margin": "lg",
-              "contents": [
-                {
-                  "type": "box",
-                  "layout": "baseline",
-                  "spacing": "sm",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "Date",
-                      "flex": 1,
-                      "size": "sm",
-                      "color": "#AAAAAA"
-                    },
-                    {
-                      "type": "text",
-                      "text": "Monday 25, 9:00PM",
-                      "flex": 4,
-                      "size": "sm",
-                      "color": "#666666",
-                      "wrap": true
-                    }
-                  ]
-                },
-                {
-                  "type": "box",
-                  "layout": "baseline",
-                  "spacing": "sm",
-                  "contents": [
-                    {
-                      "type": "text",
-                      "text": "Place",
-                      "flex": 1,
-                      "size": "sm",
-                      "color": "#AAAAAA"
-                    },
-                    {
-                      "type": "text",
-                      "text": "LINE Thailand",
-                      "flex": 4,
-                      "size": "sm",
-                      "color": "#666666",
-                      "wrap": true
-                    }
-                  ]
-                },
-                {
-                  "type": "box",
-                  "layout": "vertical",
-                  "margin": "xxl",
-                  "contents": [
-                    {
-                      "type": "spacer"
-                    },
-                    {
-                      "type": "image",
-                      "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/linecorp_code_withborder.png",
-                      "size": "xl",
-                      "aspectMode": "cover"
-                    },
-                    {
-                      "type": "text",
-                      "text": "You can enter the theater by using this code instead of a ticket",
-                      "margin": "xxl",
-                      "size": "xs",
-                      "color": "#AAAAAA",
-                      "wrap": true
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "image",
+                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip13.jpg",
+                "aspectMode": "cover",
+                "size": "full"
+              }
+            ],
+            "cornerRadius": "100px",
+            "width": "72px",
+            "height": "72px"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+              {
+                "type": "text",
+                "text": "manager",
+                "color": "#aaaaaa",
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "contents": [],
+                "size": "xl",
+                "wrap": true,
+                "text": params.name,
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": params.com,
+                "margin": "10px"
+              }
+            ]
+          }
+        ],
+        "spacing": "xl",
+        "paddingAll": "20px"
+      },
+      {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "text",
+                "text": "☎",
+                "flex": 1,
+                "color": "#15857b",
+                "weight": "bold"
+              },
+              {
+                "type": "text",
+                "text": params.phone,
+                "flex": 4
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "contents": [
+              {
+                "type": "text",
+                "text": "✉",
+                "flex": 1,
+                "weight": "bold",
+                "color": "#15857b"
+              },
+              {
+                "type": "text",
+                "text": params.email,
+                "flex": 4
+              }
+            ]
+          }
+        ],
+        "paddingStart": "20px",
+        "paddingEnd": "20px",
+        "paddingBottom": "20px"
       }
-    }
+    ],
+    "paddingAll": "0px"
+  }
+}
   ])
   if (result) {
     alert(`[${result.status}] Message sent!`)
@@ -132,15 +138,22 @@ async function liffInit() {
   }
 }
 
-function fetchData() {
+function fetchParams() {
   const urlParams = new URLSearchParams(window.location.search)
-  document.getElementById("setName").innerText = urlParams.get('1')
-  document.getElementById("setCom").innerText = urlParams.get('2')
-  document.getElementById("setPhone").innerText = urlParams.get('3')
+  const name = urlParams.get('1')
+  const com = urlParams.get('2')
+  const phone = urlParams.get('3')
+  const email = urlParams.get('4')
+  document.getElementById("setName").innerText = name
+  document.getElementById("setCom").innerText = com
+  document.getElementById("setPhone").innerText = phone
+  document.getElementById("setEmail").innerText = email
+  
+  return {name, com, phone, email}
 }
 
 function main() {
   liffInit()
-  fetchData()
+  fetchParams()
 }
 main()
