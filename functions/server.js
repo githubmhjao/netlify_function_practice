@@ -12,7 +12,7 @@ const app = express()
 
 const config = {
     channelSecret: process.env.lineChannelSecret,
-    channelAccessToken: process.env.lineChannelAccessToken
+    channelAccessToken: process.env.lineChannelAccessToken,
 }
 
 const router = express.Router()
@@ -48,7 +48,7 @@ function updateRecord(userId, record, message) {
     record.reply.push(message)
     record.stage += 1
     
-    if (record.stage < 4) {
+    if (record.stage < 5) {
         fs.writeFileSync(`/tmp/${userId}.txt`, JSON.stringify(record))
     } else {
         fs.unlinkSync(`/tmp/${userId}.txt`)
@@ -79,8 +79,11 @@ function handleEvent(event) {
             replyText = "[3] 請輸入電話"
             break
         case 4:
+            replyText = "[4] 請輸入信箱"
+            break
+        case 5:
             replyText = record.reply.map((x, i) => `${i}=${encodeURIComponent(x)}`).join('&')
-            replyText = "https://wizardly-newton-b42de5.netlify.app/?" + replyText
+            replyText = `名片已經準備完成囉！\n${process.env.liffURL}/?${replyText}`
             break            
     }
 //     const replyText = JSON.stringify(record)
