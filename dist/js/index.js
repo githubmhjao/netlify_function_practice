@@ -1,110 +1,22 @@
 async function sendShare() {
   const params = fetchParams()
-  const result = await liff.shareTargetPicker([
-    {
-  "type": "bubble",
-  "body": {
-    "type": "box",
-    "layout": "vertical",
-    "contents": [
+  const result = await liff.shareTargetPicker([{
+  "type": "bubble", // ①
+  "body": { // ②
+    "type": "box", // ③
+    "layout": "horizontal", // ④
+    "contents": [ // ⑤
       {
-        "type": "box",
-        "layout": "horizontal",
-        "contents": [
-          {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "image",
-                "url": "https://scdn.line-apps.com/n/channel_devcenter/img/flexsnapshot/clip/clip13.jpg",
-                "aspectMode": "cover",
-                "size": "full"
-              }
-            ],
-            "cornerRadius": "100px",
-            "width": "72px",
-            "height": "72px"
-          },
-          {
-            "type": "box",
-            "layout": "vertical",
-            "contents": [
-              {
-                "type": "text",
-                "text": "manager",
-                "color": "#aaaaaa",
-                "weight": "bold"
-              },
-              {
-                "type": "text",
-                "contents": [],
-                "size": "xl",
-                "wrap": true,
-                "text": params.name,
-                "weight": "bold"
-              },
-              {
-                "type": "text",
-                "text": params.com,
-                "margin": "10px"
-              }
-            ]
-          }
-        ],
-        "spacing": "xl",
-        "paddingAll": "20px"
+        "type": "text", // ⑥
+        "text": "Hello,"
       },
       {
-        "type": "box",
-        "layout": "vertical",
-        "contents": [
-          {
-            "type": "box",
-            "layout": "horizontal",
-            "contents": [
-              {
-                "type": "text",
-                "text": "☎",
-                "flex": 1,
-                "color": "#15857b",
-                "weight": "bold"
-              },
-              {
-                "type": "text",
-                "text": params.phone,
-                "flex": 4
-              }
-            ]
-          },
-          {
-            "type": "box",
-            "layout": "horizontal",
-            "contents": [
-              {
-                "type": "text",
-                "text": "✉",
-                "flex": 1,
-                "weight": "bold",
-                "color": "#15857b"
-              },
-              {
-                "type": "text",
-                "text": params.email,
-                "flex": 4
-              }
-            ]
-          }
-        ],
-        "paddingStart": "20px",
-        "paddingEnd": "20px",
-        "paddingBottom": "20px"
+        "type": "text", // ⑥
+        "text": "World!"
       }
-    ],
-    "paddingAll": "0px"
+    ]
   }
-}
-  ])
+}])
   if (result) {
     alert(`[${result.status}] Message sent!`)
   } else {
