@@ -8,7 +8,10 @@
     "express": "^4.17.1",
     "serverless-http": "^2.3.0"
   },
+  "devDependencies": {
+    "netlify-lambda": "^1.6.3"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "netlify-lambda build express"
   }
 }
